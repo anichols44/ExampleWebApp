@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"                
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/WEB-INF/templates/login/login-template.xhtml" >
+    
+    <ui:define name="page_content">
+        
+        <form id="login_form" class="form-inline" method="post" action="j_security_check">
+            <div id="login-UsernameLbl">
+                <h:outputLabel for="j_username" value="Username"/>
+            </div>
+            <div id="login-UsernameFld">
+                <h:inputText id="j_username"
+                     required="true" requiredMessage="Username required"/>
+            </div>
+            <div>
+                <h:message for="j_username" />
+            </div>
+            <div id="login-PasswordLbl">
+                <h:outputLabel for="j_password" value="Password"/>
+            </div>
+            <div id="login-PasswordFld">
+                <h:inputSecret id="j_password"
+                     required="true" requiredMessage="Password required"/>
+                 <div>
+                    <h:message for="j_password" />
+                </div>
+            </div>
+            <div id="loginBtnRow">
+                <h:commandButton id="submit" value="Login" />
+            </div>
+        </form>
+
+    </ui:define>
+    
+</ui:composition>

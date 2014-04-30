@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/WEB-INF/templates/main/main-template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html">
+    
+    <ui:define name="page_title">
+        Welcome to the app
+    </ui:define>
+    
+    <ui:define name="page_menu">
+        <div>
+            <ul>
+                <li>
+                    <a href="#{exampleBean.businessLink}">Business</a>
+                </li>
+                <li>
+                    <a href="#{exampleBean.superAdminLink}">Super admin</a>
+                </li>
+            </ul>
+        </div>
+    </ui:define>
+    
+</ui:composition>

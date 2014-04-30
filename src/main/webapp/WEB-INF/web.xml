@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	 version="3.0">
+       
+    <!-- 
+    File to serve at context root. This can be a public facing page with links to non-public pages, which will only be accessible
+    after the user has logged in. It can also just redirect to a non-public page, which will have the container make the user
+    login by redirecting to the login page specified below.
+    -->
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+    
+    
+    <!-- 
+    ==========================
+    Container managed security
+    ==========================
+    -->
+    
+    <!-- Defines page to use for login form and login error - user is redirected to specified page when trying to access a web page  -->
+    <login-config>        
+        <auth-method>FORM</auth-method>
+        <realm-name>ApplicationRealm</realm-name>
+        <form-login-config>
+            <form-login-page>/WEB-INF/login/login.xhtml</form-login-page>
+            <form-error-page>/WEB-INF/login/login.xhtml</form-error-page>
+        </form-login-config>
+    </login-config>
+    
+    <!-- Defines roles associated with users - allows you to specify which roles/sets of users can access which web resources -->
+    <security-role>
+        <description>regular administrator</description>
+        <role-name>admin</role-name>
+    </security-role>
+    <security-role>
+        <description>super administrator</description>
+        <role-name>super-admin</role-name>
+    </security-role>
+
+    <!-- Web resource security constraints -->
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>super-administration</web-resource-name>
+            <url-pattern>/administration/super-admin-only/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description>super administrator pages</description>
+            <role-name>super-admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>administration</web-resource-name>
+            <url-pattern>/administration/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description>admin</description>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+    
+    <!--
+    ======================================
+    End container managed security section
+    ======================================
+    -->
+    
+    <!-- Specifies custom error pages for given error codes -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/404.xhtml</location>
+    </error-page>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/403.xhtml</location>
+    </error-page>
+    
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.xhtml</url-pattern>
+    </servlet-mapping>
+    
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    
+</web-app>
